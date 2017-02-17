@@ -60,6 +60,7 @@ class WebUser extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 
     public function validatePassword($password){
         return $this->password === $password;
+        //if password is hashed use $this->password === md5($password)
         // return Yii::$app->security->validatePassword($password, $this->password_hash);
     }
 

@@ -33,11 +33,11 @@ class SiteController extends Controller
                         'actions' =>['contact'],
                         'allow'=> true,
                         'matchCallback'=> function(){
-                            if(Yii::$app->user->isGuest){
-                                return false;
-                            }else{
-                                return Yii::$app->user->identity->access_level <= Yii::$app->user->identity->ADMIN;
+                            $bool = false;
+                            if(!Yii::$app->user->isGuest){
+                                $bool =Yii::$app->user->identity->access_level == Yii::$app->user->identity->ADMIN;
                             }
+                            return $bool;
                         }
                     ],
                 ],

@@ -8,7 +8,9 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
+use app\assets\FaAssets;
 
+FaAssets::register($this);
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -35,8 +37,9 @@ AppAsset::register($this);
     ]);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
+        'encodeLabels'=>false,
         'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
+            ['label' => 'Home <i class="fa fa-home" aria-hidden="true"></i>', 'url' => ['/site/index']],
             ['label' => 'About', 'url' => ['/site/about']],
             ['label' => 'Contact', 'url' => ['/site/contact']],
             Yii::$app->user->isGuest ? (
@@ -56,11 +59,37 @@ AppAsset::register($this);
     NavBar::end();
     ?>
 
-    <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-        <?= $content ?>
+    <div class="container" style="width: 100%;">
+
+        <div style="float:left; width: 20%">
+            <?php
+                echo Nav::widget([
+                    'options' => ['class' =>'nav-stacked','data-spy'=>"affix"],
+                    'items' => [
+                        [
+                            'label' => 'Home',
+                            'url' => ['site/index'],
+                            'linkOptions' => [""],
+                        ],
+                        [
+                            'label' => 'Dropdown',
+                        ],
+                        ['label' =>'OPTION 1'],
+                        ['label' =>'OPTION 2'],
+                        ['label' =>'OPTION 3'],
+                        ['label' =>'OPTION 4'],
+                    ],
+                ]);
+
+            ?>
+        </div>
+        <div style="float:right; width: 80%">
+            <?php echo Breadcrumbs::widget([
+                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+            ]) ?>
+            <?= $content ?>            
+        </div>
+        
     </div>
 </div>
 

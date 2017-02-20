@@ -5,8 +5,8 @@
   - Login
   - database connection
   - RBAC
-    
-    ```php
+
+      ```php
 // /path/to/your/controller
 public function behaviors()
     {
@@ -48,3 +48,6 @@ public function behaviors()
 
 
     ```
+  - added Foontawesome assets
+    
+

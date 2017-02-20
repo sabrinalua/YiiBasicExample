@@ -39,16 +39,16 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav navbar-right'],
         'encodeLabels'=>false,
         'items' => [
-            ['label' => 'Home <i class="fa fa-home" aria-hidden="true"></i>', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
+            ['label' => '<i class="fa fa-home" aria-hidden="true"></i> Home', 'url' => ['/site/index']],
+            ['label' => ' <i class="fa fa-info" aria-hidden="true"></i> About', 'url' => ['/site/about']],
+            ['label' => ' <i class="fa fa-phone" aria-hidden="true"></i> Contact', 'url' => ['/site/contact']],
             Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
+                ['label' => '<i class="fa fa-sign-in" aria-hidden="true"></i> Login', 'url' => ['/site/login']]
             ) : (
                 '<li>'
                 . Html::beginForm(['/site/logout'], 'post')
                 . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->login_id . ')',
+                    '<i class="fa fa-sign-out" aria-hidden="true"></i> Logout (' . Yii::$app->user->identity->login_id . ')',
                     ['class' => 'btn btn-link logout']
                 )
                 . Html::endForm()

@@ -8,6 +8,9 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\WebUser;
+use app\models\UserOrgLink;
+
 
 class SiteController extends Controller
 {
@@ -35,7 +38,8 @@ class SiteController extends Controller
                         'matchCallback'=> function(){
                             $bool = false;
                             if(!Yii::$app->user->isGuest){
-                                $bool =Yii::$app->user->identity->access_level == Yii::$app->user->identity->ADMIN;
+                                $bool = (int)Yii::$app->session->get('user.access_lv') == (int)Yii::$app->user->identity->ADMIN;
+                                
                             }
                             return $bool;
                         }
@@ -74,7 +78,9 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        // echo "sesh".(int)Yii::$app->session->get('user.access_level');
+        // echo "<br>admin".(int)Yii::$app->user->identity->ADMIN;
+       return $this->render('index');
     }
 
     /**
@@ -90,6 +96,11 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            $user = WebUser::findOne(['login_id'=>$model->username]);
+            $link = UserOrgLink::findOne(['user_id'=>$user->id]);
+            $role = $link->role_level;
+            $role_name = $link->role_subtitle;
+            Yii::$app->session->set('user.access_lv',$role);
             return $this->goBack();
         }
         return $this->render('login', [

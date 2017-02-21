@@ -14,8 +14,11 @@ use Yii;
  */
 class WebUser extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
-    public $ADMIN = 'admin';
-    public $USER = 'user';
+    // public $ADMIN = 'admin';
+    // public $USER = 'user';
+
+    public $ADMIN= 5;
+    public $USER =1;
     /**
      * @inheritdoc
      */

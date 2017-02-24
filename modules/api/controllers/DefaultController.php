@@ -2,7 +2,7 @@
 
 namespace app\modules\api\controllers;
 use Yii;
-use yii\web\Controller;
+use yii\rest\Controller;
 
 /**
  * Default controller for the `api` module
@@ -33,7 +33,7 @@ class DefaultController extends Controller
     }
 
     public function actionIndex()
-    {	Yii::$app->response->statusCode =400;
+    {	Yii::$app->response->statusCode =403;
         return [1,2,3];
     }
 }

@@ -11,6 +11,10 @@ use app\models\ContactForm;
 use app\models\WebUser;
 use app\models\UserOrgLink;
 use Jabran\CSV_Parser;
+use app\models\ExModel;
+use yii\helpers\Json;
+
+
 
 class SiteController extends Controller
 {
@@ -78,8 +82,12 @@ class SiteController extends Controller
      */
 
     public function actionIndex(){
-        $k = WebUser::findIdentityByAccessToken('developer');
-        var_dump($k);
+        $ex = new ExModel();
+        $ex->user_id = 1;
+        $k = $ex->getLinks();
+        // $user = $k->user;
+        var_dump(Json::encode($k));
+
         // return $this->render('index');
     }
     public function actionIndexk()

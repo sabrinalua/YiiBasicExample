@@ -10,7 +10,7 @@ use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\WebUser;
 use app\models\UserOrgLink;
-
+use Jabran\CSV_Parser;
 
 class SiteController extends Controller
 {
@@ -76,11 +76,36 @@ class SiteController extends Controller
      *
      * @return string
      */
-    public function actionIndex()
+
+    public function actionIndex(){
+        $k = WebUser::findIdentityByAccessToken('developer');
+        var_dump($k);
+        // return $this->render('index');
+    }
+    public function actionIndexk()
     {
         // echo "sesh".(int)Yii::$app->session->get('user.access_level');
         // echo "<br>admin".(int)Yii::$app->user->identity->ADMIN;
-       return $this->render('index');
+        $csv_path = (__DIR__).'/sample_invoice_v1.csv';
+        $csv = new CSV_Parser();
+        $csv->fromPath($csv_path);
+        $array =$csv->parse(false);
+        $new =[];
+        $i=0;
+        foreach ($array as $a){
+            $i++;
+            $bool = $a[0]==NULL? true:false;
+            if(!$bool){
+                array_push($new, $a);
+            }
+        }
+        var_dump($new);
+
+       // return $this->render('index');
+    }
+
+    public function actionIndex2(){
+
     }
 
     /**
@@ -96,6 +121,7 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
+
             $user = WebUser::findOne(['login_id'=>$model->username]);
             $link = UserOrgLink::findOne(['user_id'=>$user->id]);
             $role = $link->role_level;

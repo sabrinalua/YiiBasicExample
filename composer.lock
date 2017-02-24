@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1fc40366d807f02a2885913b01f8a5ec",
-    "content-hash": "dc2df7aaf660395032a3d217a2b17ddc",
+    "hash": "244b015ca37b1f048b2da51001a1892b",
+    "content-hash": "211fdd62fca99519fde915fd2e97fe64",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -305,6 +305,52 @@
                 "html"
             ],
             "time": "2016-07-16 12:58:58"
+        },
+        {
+            "name": "jabranr/csv-parser",
+            "version": "2.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jabranr/csv-parser.git",
+                "reference": "0fc71b15eff9880830270a0925b3973d4a70d825"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jabranr/csv-parser/zipball/0fc71b15eff9880830270a0925b3973d4a70d825",
+                "reference": "0fc71b15eff9880830270a0925b3973d4a70d825",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.7.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Jabran\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT License"
+            ],
+            "authors": [
+                {
+                    "name": "Jabran Rafique",
+                    "email": "hello@jabran.me",
+                    "homepage": "http://jabran.me"
+                }
+            ],
+            "description": "Parse CSV data from a file, stream or string",
+            "homepage": "https://github.com/jabranr/csv-parser",
+            "keywords": [
+                "csv",
+                "parser",
+                "php"
+            ],
+            "time": "2017-02-10 18:25:51"
         },
         {
             "name": "kartik-v/bootstrap-fileinput",

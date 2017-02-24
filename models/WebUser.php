@@ -68,7 +68,15 @@ class WebUser extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     }
 
     public static function findIdentityByAccessToken($token, $type = null){
-        throw new NotSupportedException();
+        // throw new NotSupportedException();
+        $query = new \yii\db\Query();
+        $query->select(['user.*'])
+        ->from('user')
+        ->join('LEFT JOIN', 'user_org_link', 'user.id=user_org_link.user_id')
+        ->where(['user_org_link.role_subtitle'=>$token]);
+        $command = $query->createCommand();
+        $data = $command->queryAll(); 
+        return $data;
     // return static::findOne(['access_token' => $token]);
     }
 

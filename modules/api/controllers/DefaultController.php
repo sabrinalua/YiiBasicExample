@@ -2,7 +2,14 @@
 
 namespace app\modules\api\controllers;
 use Yii;
+use app\modules\models\Dummy;
+use app\modules\models\Invoice;
+
+use app\modules\models\Dodo;
+
 use yii\rest\Controller;
+use yii\data\Pagination;
+use yii\data\ActiveDataProvider;
 
 /**
  * Default controller for the `api` module
@@ -15,6 +22,7 @@ class DefaultController extends Controller
         
         $headers =Yii::$app->request->headers;
         $server = Yii::$app->request->getServerName();
+        $issetUserAgent = isset($headers['user-agent']) ? 1 : 0;
         
         $_bc_dev_id = isset($headers['CUSTOM_HEADER']) ? 1 : 0;
         $server_allowed = (strcasecmp($server, $server_const))==0 ? 1 : 0; 
@@ -22,7 +30,7 @@ class DefaultController extends Controller
         if($action->id == "index"){
             $bool = true;
         }else{
-            if($_bc_dev_id and $server_allowed){
+            if($_bc_dev_id and $server_allowed and $issetUserAgent){
             $bool = true;
             }else{
                 // throw new \yii\web\ForbiddenHttpException();
@@ -34,6 +42,16 @@ class DefaultController extends Controller
 
     public function actionIndex()
     {	Yii::$app->response->statusCode =403;
-        return [1,2,3];
+        $query = Invoice::find();
+        $pagination = new Pagination([
+            'defaultPageSize' => 2,
+            'totalCount' => $query->count(),
+        ]);
+        $receiverId = '2';
+        $data = Dodo::getAll($receiverId);
+        return $data;
+
+        // return $headers =Yii::$app->request->headers['user-agent'];
     }
+
 }
